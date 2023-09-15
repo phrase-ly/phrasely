@@ -1,6 +1,6 @@
 {
-  "name": "ChatGPT",
-  "icon": "openai-icon.svg",
+  "name": "phrase.ly",
+  "icon": "image.svg",
   "identifier": "ly.phrase.dalle",
   "description": "Send the selected text to ChatGPT and append the response. Hold Shift (⇧) to copy just the response.",
   "note": "You will need an <a href=\"https://platform.openai.com/account/api-keys\">OpenAI API key</a>",
