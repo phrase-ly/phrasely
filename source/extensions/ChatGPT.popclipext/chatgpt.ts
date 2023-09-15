@@ -40,7 +40,9 @@ const chat: ActionFunction = async (input, options) => {
   });
 
   // if the last chat was long enough ago, reset the history
+  // @ts-ignore
   if (options.resetMinutes.length > 0) {
+    // @ts-ignore
     const resetInterval = parseInt(options.resetMinutes) * 1000 * 60;
     if (new Date().getTime() - lastChat.getTime() > resetInterval) {
       reset();
