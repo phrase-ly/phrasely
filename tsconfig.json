@@ -1,0 +1,48 @@
+{
+    "typedocOptions": {
+        "entryPoints": [
+            "./popclip.d.ts"
+        ],
+        "name": "PopClip Extensions JavaScript Reference",
+        "out": "./docs",
+        "disableSources": false,
+        "sort": [
+            "alphabetical"
+        ],
+        "excludeExternals": true,
+        "readme": "README-js.md",
+        "excludeNotDocumented": true
+    },
+    "compilerOptions": {
+        "strict": true,
+        "noImplicitAny": false,
+        // note es2018 requires macOS 10.14
+        // once we drop support for high sierra this can be bumped for cleaner js code
+        // (note es2018 is required for async generators)
+        "target": "es2017",
+        "lib": [
+            "es2021"
+        ],
+        // we can specify esnext lib due to polyfills in popclip
+        "skipLibCheck": true,
+        "module": "commonjs",
+        "esModuleInterop": false,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "baseUrl": "./lib",
+    },
+    "include": [
+        "./popclip.d.ts",
+        "./lib",
+        "./extras",
+        "./source",
+        "./source-contrib",    
+        "./scratch"
+    ],
+    "ts-standard": {
+        "ignore": [
+            "**/*.js",
+            "node_modules"
+        ]
+    }
+}
