@@ -58,4 +58,5 @@ const generateImage: ActionFunction = async (input, options) => {
 export const actions: Action[] = [{
   title: "Generate Image",
   code: generateImage,
+  icon: "image.svg"
 }];
