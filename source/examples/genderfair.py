@@ -3,8 +3,7 @@ from collections import Counter
 
 import openai
 
-#openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_key = "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"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 REPHRASING_PREFIX = [
     {
