@@ -1,6 +1,7 @@
 import { ChatResponse, getErrorInfo, getOpenAI } from "./openai";
+import { identifyLangugage } from "./langid";
 
-const REPHRASING_PREFIX = [
+const REPHRASING_PREFIX_DE = [
   {
     role: "system",
     content:
@@ -37,7 +38,14 @@ const REPHRASING_PREFIX = [
   },
 ];
 
-const RATING_PREFIX = [
+const REPHRASING_PREFIX_EN = [
+  { 
+    role: "system",
+    content: "Rephrase the following text in a gender-fair way"
+  }
+]
+
+const RATING_PREFIX_DE = [
   {
     role: "system",
     content:
@@ -45,10 +53,24 @@ const RATING_PREFIX = [
   },
 ];
 
+const RATING_PREFIX_EN = [
+  {
+    role: "system",
+    content: "Which of the gender-fair rephrasings is the best? Answer with the index number of the rephrasing."
+  }
+];
+
 const rephraseGenderfair = async (input, options) => {
   const openai = getOpenAI(options);
   const text = input.text;
-  // send the whole message history to OpenAI
+  
+
+  // first to language identification
+  const languageTag = await identifyLangugage(text, openai);
+
+  // if languageTag is de, use REPHRASING_PREFIX_DE, otherwise use REPHRASING_PREFIX_EN
+  const REPHRASING_PREFIX = languageTag === "de" ? REPHRASING_PREFIX_DE : REPHRASING_PREFIX_EN;
+  const RATING_PREFIX = languageTag === "de" ? RATING_PREFIX_DE : RATING_PREFIX_EN;
 
   try {
     const { data }: ChatResponse = await openai.post("chat/completions", {
