@@ -15,14 +15,14 @@ export const actions: Action[] = [
     code: summarize,
     icon: "summary.svg",
   },
+  // {
+  //   title: "Identify Lanuggae",
+  //   code: identifyLanguageAction,
+  //   icon: "langid.svg",
+  // },
   {
     title: "Genderfair",
     code: rephraseGenderfair,
     icon: "genderfair.svg",
   },
-  {
-    title: "Identify Lanuggae",
-    code: identifyLanguageAction,
-    icon: "langid.svg",
-  }
 ];

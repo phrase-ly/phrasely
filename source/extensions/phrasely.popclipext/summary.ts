@@ -26,7 +26,7 @@ export const summarize: ActionFunction = async (input, options) => {
       { role: "user", content: input.text },
     ];
     const { data }: ChatResponse = await openai.post("chat/completions", {
-      model: options.model,
+      model: "gpt-4",
       messages,
     });
 

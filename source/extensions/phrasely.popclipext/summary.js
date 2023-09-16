@@ -22,7 +22,7 @@ const summarize = async (input, options) => {
             { role: "user", content: input.text },
         ];
         const { data } = await openai.post("chat/completions", {
-            model: options.model,
+            model: "gpt-4",
             messages,
         });
         const summary = data.choices[0].message.content;
