@@ -13,7 +13,7 @@ export const summarize: ActionFunction = async (input, options) => {
       { role: "user", content: input.text },
     ];
     const { data }: ChatResponse = await openai.post("chat/completions", {
-      model: "gpt-3.5-turbo",
+      model: options.model,
       messages,
     });
 
