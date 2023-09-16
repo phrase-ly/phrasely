@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.generateImage = void 0;
 const axios_1 = require("axios");
 const voca_1 = require("voca");
 const openai_1 = require("./openai");
@@ -50,4 +51,4 @@ const generateImage = async (input, options) => {
     }
     return null;
 };
-exports.default = generateImage;
+exports.generateImage = generateImage;

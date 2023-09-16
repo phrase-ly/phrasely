@@ -49,7 +49,6 @@ const identifyLanguageAction = async (input, options) => {
     try {
         const languageTag = await identifyLangugage(input.text, openai);
         popclip.showText(languageTag);
-        popclip.showSuccess();
     }
     catch (e) {
         popclip.showText((0, openai_1.getErrorInfo)(e));

@@ -2,7 +2,8 @@ import { ChatMessage, ChatResponse, getErrorInfo, getOpenAI } from "./openai";
 
 const SUMMARIZE_PREFIX: ChatMessage = {
   role: "system",
-  content: "Summarize this text in a single sentence",
+  content:
+    "Summarize this text in the same language in less than 100 characters.",
 };
 
 export const summarize: ActionFunction = async (input, options) => {

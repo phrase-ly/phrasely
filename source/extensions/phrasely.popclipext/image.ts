@@ -53,4 +53,4 @@ const generateImage: ActionFunction = async (input, options) => {
   return null;
 };
 
-export default generateImage;
+export { generateImage };

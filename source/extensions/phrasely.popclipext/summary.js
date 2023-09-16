@@ -4,7 +4,7 @@ exports.summarize = void 0;
 const openai_1 = require("./openai");
 const SUMMARIZE_PREFIX = {
     role: "system",
-    content: "Summarize this text in a single sentence",
+    content: "Summarize this text in the same language in less than 100 characters.",
 };
 const summarize = async (input, options) => {
     const openai = (0, openai_1.getOpenAI)(options);
