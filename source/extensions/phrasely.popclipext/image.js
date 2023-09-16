@@ -4,7 +4,7 @@ exports.generateImage = void 0;
 const axios_1 = require("axios");
 const voca_1 = require("voca");
 const openai_1 = require("./openai");
-const SUPPORTS_IMG_HTML = ["Microsoft Word"];
+const SUPPORTS_IMG_HTML = ["Microsoft Word", "Firefox"];
 const SUPPORTS_A_HTML = ["Slack"];
 const generateImage = async (input, options) => {
     const openai = (0, openai_1.getOpenAI)(options);
@@ -19,7 +19,6 @@ const generateImage = async (input, options) => {
         const imageHTML = `<img src=${imageUrl} alt=${input.text}/>`;
         const linkHTML = `<a href="${imageUrl}" >${input.text}</a>`;
         const appName = popclip.context.appName;
-        popclip.showText(appName);
         if (SUPPORTS_IMG_HTML.includes(appName)) {
             popclip.pasteContent({
                 "public.html": imageHTML,

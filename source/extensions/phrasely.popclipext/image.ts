@@ -2,7 +2,7 @@ import axios from "axios";
 import { slugify } from "voca";
 import { getErrorInfo, getOpenAI, ImageResponse } from "./openai";
 
-const SUPPORTS_IMG_HTML = ["Microsoft Word"];
+const SUPPORTS_IMG_HTML = ["Microsoft Word", "Firefox"];
 const SUPPORTS_A_HTML = ["Slack"];
 
 const generateImage: ActionFunction = async (input, options) => {
@@ -19,7 +19,6 @@ const generateImage: ActionFunction = async (input, options) => {
     const imageHTML = `<img src=${imageUrl} alt=${input.text}/>`;
     const linkHTML = `<a href="${imageUrl}" >${input.text}</a>`;
     const appName = popclip.context.appName;
-    popclip.showText(appName);
     if (SUPPORTS_IMG_HTML.includes(appName)) {
       popclip.pasteContent({
         "public.html": imageHTML,
