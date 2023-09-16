@@ -4,7 +4,7 @@ Amazing extension that brings generative AI to your fingertips
 https://www.phrase.ly/
 
 
-#Requirements
+#Requirements </br>
 -> MacOS
 -> https://www.popclip.app/guide/
 
