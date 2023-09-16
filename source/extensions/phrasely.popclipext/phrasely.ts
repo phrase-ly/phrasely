@@ -1,5 +1,6 @@
 import generateImage from "./image";
 import { summarize } from "./summary";
+import { identifyLanguageAction } from "./langid";
 
 // export the actions
 export const actions: Action[] = [
@@ -9,8 +10,13 @@ export const actions: Action[] = [
     icon: "image.svg",
   },
   {
-    title: "ChatGPT: Chat",
+    title: "Summarize",
     code: summarize,
     icon: "summary.svg",
+  },
+  {
+    title: "Identify Lanuggae",
+    code: identifyLanguageAction,
+    icon: "langid.svg",
   },
 ];
