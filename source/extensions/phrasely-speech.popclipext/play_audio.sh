@@ -14,10 +14,10 @@ language=$(curl -X 'POST' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "text": "${text}"
+  "text": "$text"
 }')
 
-language=$(echo $language | grep -o '"language": *"[^"]*"' | grep -o '"[^"]*"$')
+language=$(echo "$language" | grep -o '"language": *"[^"]*"' | grep -o '"[^"]*"$' | sed 's/"//g')
 
 # Generate a temporary filename for the downloaded MP3 file
 # tmp_file=$(mktemp /tmp/downloaded_mp3_XXXXXX.mp3)
@@ -29,13 +29,14 @@ language=$(echo $language | grep -o '"language": *"[^"]*"' | grep -o '"[^"]*"$')
 res=$(curl  -G \
     https://us-central1-hackzurich23-8237.cloudfunctions.net/text2speech \
     --data-urlencode "text=$text" \
-    --data-urlencode "lang=$lang" \
+    --data-urlencode "lang=$language" \
     --http1.1\
     -v\
     -o /tmp/zium.mp3
     )
+
 # curl--data-urlencode "blah=df ssdf sdf" --data-urlencode "blah2=dfsdf sdfsd " http://whatever.com/whatever
-echo "Zium " $res
+echo "Zium $language"
 # # Check if the download was successful
 # if [ $? -ne 0 ]; then
 #   echo "Error: Failed to download the MP3 file from $url."
