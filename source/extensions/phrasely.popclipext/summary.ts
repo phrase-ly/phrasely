@@ -1,13 +1,25 @@
 import { ChatMessage, ChatResponse, getErrorInfo, getOpenAI } from "./openai";
+import { identifyLangugage } from "./langid";
 
-const SUMMARIZE_PREFIX: ChatMessage = {
+const SUMMARIZE_PREFIX_EN: ChatMessage = {
   role: "system",
   content:
-    "Summarize this text in the same language in less than 100 characters.",
+    "Summarize the following text in three short bullet points with a maximum of 10 words each",
+};
+
+const SUMMARIZE_PREFIX_DE: ChatMessage = {
+  role: "system",
+  content:
+    "Schreibe eine sehr kurze Zusammenfassung für den folgenden Text mit drei Bullet Points und maximal 10 Wörtern",
 };
 
 export const summarize: ActionFunction = async (input, options) => {
   const openai = getOpenAI(options);
+  const text = input.text;
+
+  const languageTag = await identifyLangugage(text, openai);
+  const SUMMARIZE_PREFIX = languageTag === "de" ? SUMMARIZE_PREFIX_DE : SUMMARIZE_PREFIX_EN;
+  
   try {
     const messages: ChatMessage[] = [
       SUMMARIZE_PREFIX,
