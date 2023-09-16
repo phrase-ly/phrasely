@@ -5,11 +5,11 @@ const openai_1 = require("./openai");
 const LANGID_PREFIX = [
     {
         role: "system",
-        content: "Identify the language of this text and return a BCP-47 language code",
+        content: "Identify the language of this text. Return a BCP-47 language code.",
     },
     {
         role: "user",
-        content: "Der Mauermörtel, also Mörtel zur Fertigung von Mauerwerk, unterscheidet sich in der heutigen Ausführung in wichtigen Anwendungseigenschaften vom Putzmörtel.ie Rezepturen und deren Eigenschaften auf den Anwendungszweck abgestimmt.",
+        content: "Text: Der Mauermörtel, also Mörtel zur Fertigung von Mauerwerk, unterscheidet sich in der heutigen Ausführung in wichtigen Anwendungseigenschaften vom Putzmörtel.",
     },
     {
         role: "assistant",
@@ -17,7 +17,7 @@ const LANGID_PREFIX = [
     },
     {
         role: "user",
-        content: "Hüt mogre bini i de Migros go poschte und ha ganz viel Orangesaft gchauft.",
+        content: "Text: Hüt morge bini i de Migros go poschte und ha ganz viel Orangesaft gchauft.",
     },
     {
         role: "assistant",
@@ -25,7 +25,7 @@ const LANGID_PREFIX = [
     },
     {
         role: "user",
-        content: "Supplemental insurance covers more benefits and offers extra comfort in hospital in the event of illness or accident. Compare benefits and premiums.",
+        content: "Text: Supplemental insurance covers more benefits and offers extra comfort in hospital in the event of illness or accident.",
     },
     {
         role: "assistant",
@@ -35,7 +35,7 @@ const LANGID_PREFIX = [
 const identifyLangugage = async (text, openai) => {
     const messages = [
         ...LANGID_PREFIX,
-        { role: "user", content: text },
+        { role: "user", content: `Text: ${text}` },
     ];
     const { data } = await openai.post("chat/completions", {
         model: "gpt-3.5-turbo",
