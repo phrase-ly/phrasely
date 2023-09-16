@@ -1,31 +1,51 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
-const SUPPORTS_HTML = ["Microsoft Word"];
+const voca_1 = require("voca");
+const SUPPORTS_IMG_HTML = ["Microsoft Word"];
+const SUPPORTS_A_HTML = ["Slack"];
 const generateImage = async (input, options) => {
     const openai = axios_1.default.create({
         baseURL: "https://api.openai.com/v1",
         headers: { Authorization: `Bearer ${options.apikey}` },
-        timeout: 60000
+        timeout: 60000,
     });
     // send the whole message history to OpenAI
     try {
         const response = await openai.post("/images/generations", {
-            "prompt": input.text,
-            "n": 1,
-            "size": "256x256" // Todo move to options
+            prompt: input.text,
+            n: 1,
+            size: "256x256", // Todo move to options
         });
-        const { data } = response;
+        const imageUrl = response.data.data[0].url;
         // popclip.showText(data.data[0].url, {preview: true})
-        const imageHTML = `<img src=${data.data[0].url} alt=${input.text}/>`;
-        const linkHTML = `<a href="${data.data[0].url}" >${input.text}</a>`;
+        const imageHTML = `<img src=${imageUrl} alt=${input.text}/>`;
+        const linkHTML = `<a href="${imageUrl}" >${input.text}</a>`;
         const appName = popclip.context.appName;
         popclip.showText(appName);
-        if (SUPPORTS_HTML.includes(appName)) {
-            popclip.pasteContent({ "public.html": imageHTML, "public.utf8-plain-text": input.text });
+        if (SUPPORTS_IMG_HTML.includes(appName)) {
+            popclip.pasteContent({
+                "public.html": imageHTML,
+                "public.utf8-plain-text": input.text,
+            });
+        }
+        else if (SUPPORTS_A_HTML.includes(appName)) {
+            popclip.pasteContent({
+                "public.html": linkHTML,
+                "public.utf8-plain-text": input.text,
+            });
         }
         else {
-            popclip.pasteContent({ "public.html": linkHTML, "public.utf8-plain-text": input.text });
+            const tinyurlResponse = await axios_1.default.post("https://api.tinyurl.com/create", {
+                url: imageUrl,
+                alias: (0, voca_1.slugify)(input.text),
+            }, {
+                headers: {
+                    Authorization: `Bearer 3R49Hxa3n6mXENJy3HK3bvZSk2JrsZ4VN0sgi5u9g7xWI4eRnvNX8nIclpcb`,
+                },
+            });
+            const shortUrl = tinyurlResponse.data.data.tiny_url;
+            popclip.pasteText(shortUrl);
         }
         popclip.showSuccess();
     }

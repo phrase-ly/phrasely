@@ -31,8 +31,35 @@ const chat = async (input, options) => {
             reset();
         }
     }
+    let prefix = "";
     // add the new message to the history
-    messages.push({ role: "user", content: input.text });
+    if (input.text.length > 100) {
+        prefix = input.text.slice(0, 100);
+    }
+    else {
+        prefix = input.text;
+    }
+    messages.push({ role: "user", content: "Detect the language of the text " + prefix });
+    try {
+        const { data } = await openai.post("chat/completions", {
+            model: "gpt-3.5-turbo",
+            messages,
+        });
+        // add the response to the history
+        messages.push(data.choices[0].message);
+        lastChat = new Date();
+        // if holding shift, copy just the response. else, paste the last input and response.
+        // if (popclip.modifiers.shift) {
+        //   popclip.copyText(getTranscript(1));
+        // } else {
+        //   popclip.pasteText(getTranscript(2));
+        // }
+        // popclip.showSuccess();
+    }
+    catch (e) {
+        popclip.showText(getErrorInfo(e));
+    }
+    messages.push({ role: "user", content: "Summarize the text up to 3 sentences in the detected language." + input.text });
     // send the whole message history to OpenAI
     try {
         const { data } = await openai.post("chat/completions", {
@@ -50,9 +77,11 @@ const chat = async (input, options) => {
             popclip.pasteText(getTranscript(2));
         }
         popclip.showSuccess();
+        reset();
     }
     catch (e) {
         popclip.showText(getErrorInfo(e));
+        reset();
     }
     return null;
 };
