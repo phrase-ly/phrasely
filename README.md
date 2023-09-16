@@ -5,7 +5,7 @@ https://www.phrase.ly/
 
 
 #Requirements </br>
--> MacOS
+-> MacOS </br>
 -> https://www.popclip.app/guide/
 
 #Installation
