@@ -24,5 +24,5 @@ export const actions: Action[] = [
     title: "Identify Lanuggae",
     code: identifyLanguageAction,
     icon: "langid.svg",
-  },
+  }
 ];

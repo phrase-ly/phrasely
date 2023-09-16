@@ -31,7 +31,7 @@ export const summarize: ActionFunction = async (input, options) => {
     });
 
     const summary = data.choices[0].message.content;
-    popclip.pasteText(summary);
+    popclip.showText(summary, { preview: true });
     popclip.showSuccess();
   } catch (e) {
     popclip.showText(getErrorInfo(e));

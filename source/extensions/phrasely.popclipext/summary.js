@@ -26,7 +26,7 @@ const summarize = async (input, options) => {
             messages,
         });
         const summary = data.choices[0].message.content;
-        popclip.pasteText(summary);
+        popclip.showText(summary, { preview: true });
         popclip.showSuccess();
     }
     catch (e) {

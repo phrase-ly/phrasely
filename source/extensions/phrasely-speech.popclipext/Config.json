@@ -1,0 +1,18 @@
+{
+  "name": "phrase.ly speech",
+  "icon": "speech.svg",
+  "identifier": "phrase.ly.speech",
+  "description": "Send the selected text to ChatGPT and append the response. Hold Shift (⇧) to copy just the response.",
+  "note": "You will need an <a href=\"https://platform.openai.com/account/api-keys\">OpenAI API key</a>",
+  "app": {
+    "name": "Phrasely",
+    "link": "https://phrase.ly"
+  },
+  "popclipVersion": 4069,
+    "shellScriptFile": "speak.sh",
+    "interpreter": "zsh",
+    "stdin": "text",
+  "entitlements": [
+    "network"
+  ]
+}
