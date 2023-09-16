@@ -2,15 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const voca_1 = require("voca");
+const openai_1 = require("./openai");
 const SUPPORTS_IMG_HTML = ["Microsoft Word"];
 const SUPPORTS_A_HTML = ["Slack"];
 const generateImage = async (input, options) => {
-    const openai = axios_1.default.create({
-        baseURL: "https://api.openai.com/v1",
-        headers: { Authorization: `Bearer ${options.apikey}` },
-        timeout: 60000,
-    });
-    // send the whole message history to OpenAI
+    const openai = (0, openai_1.getOpenAI)(options);
     try {
         const response = await openai.post("/images/generations", {
             prompt: input.text,
@@ -50,8 +46,7 @@ const generateImage = async (input, options) => {
         popclip.showSuccess();
     }
     catch (e) {
-        // @ts-ignore
-        popclip.showText(e.toString());
+        popclip.showText((0, openai_1.getErrorInfo)(e));
     }
     return null;
 };

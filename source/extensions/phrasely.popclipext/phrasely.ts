@@ -1,5 +1,5 @@
 import generateImage from "./image";
-import {summarize} from "./summary";
+import { summarize } from "./summary";
 
 // export the actions
 export const actions: Action[] = [
@@ -11,6 +11,6 @@ export const actions: Action[] = [
   {
     title: "ChatGPT: Chat",
     code: summarize,
-    icon: "summary.svg"
-  },  
+    icon: "summary.svg",
+  },
 ];

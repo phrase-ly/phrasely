@@ -1,28 +1,14 @@
 import axios from "axios";
 import { slugify } from "voca";
-
-interface Image {
-  url: string;
-}
-
-interface ImageResponse {
-  created: Number;
-  data: Image[];
-}
+import { getErrorInfo, getOpenAI, ImageResponse } from "./openai";
 
 const SUPPORTS_IMG_HTML = ["Microsoft Word"];
 const SUPPORTS_A_HTML = ["Slack"];
 
 const generateImage: ActionFunction = async (input, options) => {
-  const openai = axios.create({
-    baseURL: "https://api.openai.com/v1",
-    headers: { Authorization: `Bearer ${options.apikey}` },
-    timeout: 60_000,
-  });
-
-  // send the whole message history to OpenAI
+  const openai = getOpenAI(options);
   try {
-    const response = await openai.post("/images/generations", {
+    const response: ImageResponse = await openai.post("/images/generations", {
       prompt: input.text,
       n: 1, // Todo move to options
       size: "256x256", // Todo move to options
@@ -62,8 +48,7 @@ const generateImage: ActionFunction = async (input, options) => {
     }
     popclip.showSuccess();
   } catch (e) {
-    // @ts-ignore
-    popclip.showText(e.toString());
+    popclip.showText(getErrorInfo(e));
   }
   return null;
 };

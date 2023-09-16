@@ -12,7 +12,7 @@ exports.actions = [
     },
     {
         title: "ChatGPT: Chat",
-        code: summary_1.default,
+        code: summary_1.summarize,
         icon: "summary.svg",
     },
 ];
