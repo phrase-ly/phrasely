@@ -27,4 +27,10 @@ exports.actions = [
         code: langid_1.identifyLanguageAction,
         icon: "langid.svg",
     },
+    {
+        title: "Speak",
+        shellScriptFile: "speak.sh",
+        icon: "speech.svg",
+        interpreter: "zsh"
+    }
 ];
