@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rephraseGenderfair = void 0;
 const openai_1 = require("./openai");
-const REPHRASING_PREFIX = [
+const langid_1 = require("./langid");
+const REPHRASING_PREFIX_DE = [
     {
         role: "system",
         content: "Formuliere den folgenden Text um, sodass er gendergerecht ist wie in folgenden Beispielen",
@@ -32,16 +33,32 @@ const REPHRASING_PREFIX = [
         content: "Die Reiseleitung versicherte dem Team, dass es sowohl vom Publikum und der Kundschaft wie auch von der Bevölkerung im Allgmeinen viel Unterstützung geniesst.",
     },
 ];
-const RATING_PREFIX = [
+const REPHRASING_PREFIX_EN = [
+    {
+        role: "system",
+        content: "Rephrase the following text in a gender-fair way"
+    }
+];
+const RATING_PREFIX_DE = [
     {
         role: "system",
         content: "Welche der gendergerechten Umformulierungen des Textes ist die beste? Antworte mit dem Index der Umformulierung.",
     },
 ];
+const RATING_PREFIX_EN = [
+    {
+        role: "system",
+        content: "Which of the gender-fair rephrasings is the best? Answer with the index number of the rephrasing."
+    }
+];
 const rephraseGenderfair = async (input, options) => {
     const openai = (0, openai_1.getOpenAI)(options);
     const text = input.text;
-    // send the whole message history to OpenAI
+    // first to language identification
+    const languageTag = await (0, langid_1.identifyLangugage)(text, openai);
+    // if languageTag is de, use REPHRASING_PREFIX_DE, otherwise use REPHRASING_PREFIX_EN
+    const REPHRASING_PREFIX = languageTag === "de" ? REPHRASING_PREFIX_DE : REPHRASING_PREFIX_EN;
+    const RATING_PREFIX = languageTag === "de" ? RATING_PREFIX_DE : RATING_PREFIX_EN;
     try {
         const { data } = await openai.post("chat/completions", {
             model: "gpt-4",
