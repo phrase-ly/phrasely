@@ -1,7 +1,7 @@
 {
-  "name": "ChatGPT",
-  "icon": "openai-icon.svg",
-  "identifier": "ly.phrase.dalle",
+  "name": "phrase.ly",
+  "icon": "image.svg", 
+  "identifier": "phrase.ly",
   "description": "Send the selected text to ChatGPT and append the response. Hold Shift (⇧) to copy just the response.",
   "note": "You will need an <a href=\"https://platform.openai.com/account/api-keys\">OpenAI API key</a>",
   "app": {
@@ -9,7 +9,7 @@
     "link": "https://phrase.ly"
   },
   "popclipVersion": 4069,
-  "module": "dalle.js",
+  "module": "phrasely.js",
   "entitlements": [
     "network"
   ],
@@ -20,5 +20,19 @@
       "type": "string",
       "description": "Obtain an API key from: https://platform.openai.com/account/api-keys"
     },
+    {
+      "identifier:": "model",
+      "label": "Model",
+      "type": "multiple",
+      "defaultValue": "gpt-3.5-turbo",
+      "values": ["gpt-3.5-turbo", "gpt-4"]
+    },
+    {
+      "identifier:": "resetMinutes",
+      "label": "Reset Timer (minutes)",
+      "type": "string",
+      "description": "Reset the conversation if idle for this many minutes. Set blank to disable.",
+      "defaultValue": "15"
+    } 
   ]
 }

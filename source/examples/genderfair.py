@@ -83,7 +83,7 @@ rating_response = openai.ChatCompletion.create(
     temperature=1,
     n=10,
     max_tokens=1,
-    top_p=0.25,
+    top_p=1,
     frequency_penalty=0,
     presence_penalty=0,
 )
