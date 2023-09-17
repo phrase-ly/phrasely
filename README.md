@@ -4,11 +4,12 @@ Amazing extension that brings generative AI to your fingertips
 https://www.phrase.ly/
 
 
-#Requirements </br>
--> MacOS </br>
--> https://www.popclip.app/guide/
+# Requirements </br>
+- MacOS
+- [PopClip](https://www.popclip.app/guide/)
 
-#Installation
-
-Add capabilities you want to use by clicking on the .popclipext files at ```./phrasely/source/extensions/```
-
+# Installation
+- Install PopClip
+- Download [`phrasely.zip`](https://github.com/phrase-ly/phrasely/releases/download/0.0.1/phrasely.zip)
+- Unzip the file and install the PopClip extensions by double clicking.
+- Add your OpenAI key in the PopClip options.
