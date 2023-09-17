@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/dist/bash
 
 # Check if an argument (URL) is provided
 # if [ $# -eq 0 ]; then
