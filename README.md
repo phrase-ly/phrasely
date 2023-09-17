@@ -3,7 +3,7 @@ Amazing extension that brings generative AI to your fingertips
 
 https://www.phrase.ly/
 
-https://www.youtube.com/watch?v=MpJtgCAhnW0
+- [Video](https://www.youtube.com/watch?v=MpJtgCAhnW0)
 
 # Requirements </br>
 - MacOS
